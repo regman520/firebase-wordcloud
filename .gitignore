@@ -1,4 +1,31 @@
-wordcloud-local-check.png
+# System files
+desktop.ini
+Thumbs.db
+.DS_Store
+*.tmp
+~$*
+
+# Sensitive data
+.env
+.env.*
+*.key
+credentials.*
+secrets.*
+
+# Local AI agent settings
+.claude/
+.codex/
+
+# Node.js
 node_modules/
+package-lock.json
+
+# Build output and caches
+dist/
+build/
+.cache/
 .firebase/
+
+# Local verification artifacts
+wordcloud-local-check.png
 .firebaserc.local
