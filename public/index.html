@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>課堂即時文字雲</title>
+    <meta name="description" content="使用 Firebase Firestore 製作的課堂即時文字雲。">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23124537'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-size='28' font-family='serif' fill='%23fffaf0'%3E%E9%9B%B2%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="課堂即時文字雲">
+        <div class="cloud-panel">
+          <div class="cloud-topbar">
+            <div>
+              <p class="eyebrow">Firebase Live Board</p>
+              <h1>課堂即時文字雲</h1>
+            </div>
+            <div class="status-pill" id="statusPill">
+              <span class="status-dot"></span>
+              <span id="statusText">連線中</span>
+            </div>
+          </div>
+
+          <div class="canvas-wrap">
+            <canvas id="wordCloud" aria-label="即時文字雲畫布"></canvas>
+            <div class="empty-state" id="emptyState">
+              <strong>等待第一個關鍵字</strong>
+              <span>輸入一個課堂想法，文字雲會即時長出來。</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="control-panel" aria-label="文字雲控制區">
+          <form class="submit-card" id="wordForm">
+            <label for="wordInput">新增關鍵字</label>
+            <div class="input-row">
+              <input id="wordInput" name="word" type="text" maxlength="18" autocomplete="off" placeholder="例如：好奇、AI、合作">
+              <button type="submit" aria-label="送出關鍵字">
+                <span>送出</span>
+              </button>
+            </div>
+            <p class="hint">每次送出會寫入 Firestore 的 <code>wordcloud_words</code> 集合。</p>
+          </form>
+
+          <div class="metric-grid" aria-label="統計資料">
+            <div>
+              <span id="totalCount">0</span>
+              <small>總投稿</small>
+            </div>
+            <div>
+              <span id="uniqueCount">0</span>
+              <small>不同詞</small>
+            </div>
+          </div>
+
+          <section class="ranking" aria-label="熱門關鍵字">
+            <div class="section-head">
+              <h2>熱門關鍵字</h2>
+              <button class="ghost-button" id="copyLink" type="button">複製連結</button>
+            </div>
+            <ol id="rankingList"></ol>
+          </section>
+
+          <section class="latest" aria-label="最新投稿">
+            <h2>最新投稿</h2>
+            <div id="latestList" class="latest-list"></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

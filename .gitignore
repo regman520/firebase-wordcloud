@@ -1,0 +1,4 @@
+wordcloud-local-check.png
+node_modules/
+.firebase/
+.firebaserc.local
