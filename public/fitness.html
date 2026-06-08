@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./fitness.css">
+    <link rel="stylesheet" href="./fitness.css?v=20260608-import2">
   </head>
   <body>
     <main class="training-shell">
@@ -45,7 +45,10 @@
           <section class="plan-import" aria-label="匯入 ChatGPT 課表">
             <div class="builder-head">
               <h2>匯入 ChatGPT 課表</h2>
-              <button id="importPlan" type="button" class="secondary-button">帶入表單</button>
+              <div class="import-actions">
+                <button id="copyPlanPrompt" type="button" class="secondary-button">複製排課指令</button>
+                <button id="importPlan" type="button" class="secondary-button">帶入表單</button>
+              </div>
             </div>
             <textarea id="planInput" rows="7" placeholder="貼上 ChatGPT 排好的課表，例如：
 # Push Day
@@ -54,6 +57,7 @@
 ## 上斜啞鈴推
 - 16kg x 10
 - 18kg x 8"></textarea>
+            <p class="import-status" id="importStatus">可貼上標準 Markdown，也可貼上「臥推 3組 x 8下 x 40kg」這類簡短寫法。</p>
           </section>
 
           <section class="exercise-builder" aria-label="動作輸入">
@@ -97,7 +101,13 @@
         <section class="export-card">
           <div class="section-head">
             <h2>匯出給 ChatGPT</h2>
-            <button id="copyExport" type="button" class="secondary-button">複製</button>
+            <div class="export-actions">
+              <div class="mode-switch" aria-label="匯出模式">
+                <button id="exportCurrent" type="button" class="mode-button is-active">本次</button>
+                <button id="exportHistory" type="button" class="mode-button">長期</button>
+              </div>
+              <button id="copyExport" type="button" class="secondary-button">複製</button>
+            </div>
           </div>
           <textarea id="exportText" readonly rows="12" aria-label="Markdown 匯出內容"></textarea>
         </section>
@@ -149,6 +159,6 @@
       </div>
     </template>
 
-    <script type="module" src="./fitness.js"></script>
+    <script type="module" src="./fitness.js?v=20260608-import2"></script>
   </body>
 </html>

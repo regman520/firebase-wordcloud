@@ -173,6 +173,24 @@ textarea:focus {
   font-size: 0.92rem;
 }
 
+.import-status {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.import-status.is-error {
+  color: var(--red);
+}
+
+.import-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .exercise-list {
   display: grid;
   gap: 12px;
@@ -334,6 +352,38 @@ button:disabled {
   font-size: 0.9rem;
 }
 
+.export-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mode-switch {
+  height: 44px;
+  padding: 4px;
+  display: inline-flex;
+  gap: 4px;
+  border: 1px solid rgba(22, 25, 24, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 253, 247, 0.78);
+}
+
+.mode-button {
+  min-width: 58px;
+  height: 34px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--muted);
+  background: transparent;
+  font-weight: 900;
+}
+
+.mode-button.is-active {
+  color: var(--ink);
+  background: var(--amber);
+}
+
 .history-list {
   display: grid;
   gap: 8px;
@@ -413,9 +463,28 @@ button:disabled {
 
   .app-header,
   .builder-head,
+  .section-head,
   .action-row {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .export-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .import-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mode-switch {
+    width: 100%;
+  }
+
+  .mode-button {
+    flex: 1;
   }
 
   .form-grid,
