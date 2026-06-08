@@ -152,12 +152,25 @@ textarea:focus {
   box-shadow: 0 0 0 4px rgba(47, 118, 95, 0.14);
 }
 
+.plan-import,
 .exercise-builder,
 .notes-field {
   border: 1px solid rgba(22, 25, 24, 0.12);
   border-radius: 8px;
   padding: 16px;
   background: rgba(255, 255, 255, 0.42);
+}
+
+.plan-import {
+  background:
+    linear-gradient(135deg, rgba(242, 201, 76, 0.18), rgba(255, 255, 255, 0.42)),
+    rgba(255, 255, 255, 0.42);
+}
+
+.plan-import textarea {
+  margin-top: 12px;
+  min-height: 168px;
+  font-size: 0.92rem;
 }
 
 .exercise-list {
