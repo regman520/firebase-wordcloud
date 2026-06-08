@@ -5,6 +5,10 @@ service cloud.firestore {
       // Demo-only public access. Do not use for production student data.
       allow read, write: if true;
     }
+    match /fitness_workouts/{document} {
+      // Personal prototype access. Add auth before storing sensitive health data.
+      allow read, write: if true;
+    }
     match /{document=**} {
       allow read, write: if false;
     }

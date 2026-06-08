@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>健身訓練紀錄</title>
+    <meta name="description" content="記錄每次健身課程、動作、組數、重量與次數，並匯出 Markdown 給 ChatGPT 分析。">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23161918'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-size='28' font-family='serif' fill='%23f2c94c'%3EG%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./fitness.css">
+  </head>
+  <body>
+    <main class="training-shell">
+      <section class="log-panel" aria-label="今日健身紀錄">
+        <header class="app-header">
+          <div>
+            <p class="eyebrow">Training Log</p>
+            <h1>健身訓練紀錄</h1>
+          </div>
+          <a class="text-link" href="./index.html">文字雲</a>
+        </header>
+
+        <form id="workoutForm" class="workout-form">
+          <div class="form-grid">
+            <label>
+              <span>日期</span>
+              <input id="workoutDate" type="date" required>
+            </label>
+            <label>
+              <span>課程名稱</span>
+              <input id="workoutName" type="text" maxlength="32" placeholder="例如：Push Day、腿臀訓練" required>
+            </label>
+            <label>
+              <span>體重 kg</span>
+              <input id="bodyWeight" type="number" min="0" step="0.1" placeholder="選填">
+            </label>
+            <label>
+              <span>疲勞 1-5</span>
+              <input id="fatigue" type="number" min="1" max="5" step="1" placeholder="選填">
+            </label>
+          </div>
+
+          <section class="exercise-builder" aria-label="動作輸入">
+            <div class="builder-head">
+              <h2>動作與組數</h2>
+              <button id="addExercise" type="button" class="secondary-button">新增動作</button>
+            </div>
+            <div id="exerciseList" class="exercise-list"></div>
+          </section>
+
+          <label class="notes-field">
+            <span>今日備註</span>
+            <textarea id="workoutNotes" rows="4" placeholder="例如：右肩緊、睡眠不足、最後一組保留 1 下"></textarea>
+          </label>
+
+          <div class="action-row">
+            <button type="submit" class="primary-button">儲存訓練</button>
+            <button id="resetForm" type="button" class="secondary-button">清空</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="history-panel" aria-label="長期紀錄">
+        <div class="status-card">
+          <div class="status-pill" id="statusPill">
+            <span class="status-dot"></span>
+            <span id="statusText">連線中</span>
+          </div>
+          <div class="metric-row">
+            <div>
+              <strong id="sessionCount">0</strong>
+              <span>筆訓練</span>
+            </div>
+            <div>
+              <strong id="totalVolume">0</strong>
+              <span>總容量 kg</span>
+            </div>
+          </div>
+        </div>
+
+        <section class="export-card">
+          <div class="section-head">
+            <h2>匯出給 ChatGPT</h2>
+            <button id="copyExport" type="button" class="secondary-button">複製</button>
+          </div>
+          <textarea id="exportText" readonly rows="12" aria-label="Markdown 匯出內容"></textarea>
+        </section>
+
+        <section class="history-card">
+          <div class="section-head">
+            <h2>最近紀錄</h2>
+            <button id="loadSelected" type="button" class="secondary-button">載入編輯</button>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </section>
+      </aside>
+    </main>
+
+    <template id="exerciseTemplate">
+      <article class="exercise-card">
+        <div class="exercise-top">
+          <label>
+            <span>動作名稱</span>
+            <input class="exercise-name" type="text" maxlength="32" placeholder="例如：臥推、深蹲" required>
+          </label>
+          <label>
+            <span>部位</span>
+            <input class="exercise-part" type="text" maxlength="16" placeholder="胸、背、腿">
+          </label>
+          <button class="remove-exercise icon-button" type="button" aria-label="刪除動作">×</button>
+        </div>
+        <div class="set-list"></div>
+        <button class="add-set secondary-button" type="button">新增一組</button>
+      </article>
+    </template>
+
+    <template id="setTemplate">
+      <div class="set-row">
+        <span class="set-number"></span>
+        <label>
+          <span>重量 kg</span>
+          <input class="set-weight" type="number" min="0" step="0.5" placeholder="0">
+        </label>
+        <label>
+          <span>次數</span>
+          <input class="set-reps" type="number" min="0" step="1" placeholder="0">
+        </label>
+        <label>
+          <span>RPE</span>
+          <input class="set-rpe" type="number" min="1" max="10" step="0.5" placeholder="選填">
+        </label>
+        <button class="remove-set icon-button" type="button" aria-label="刪除組數">×</button>
+      </div>
+    </template>
+
+    <script type="module" src="./fitness.js"></script>
+  </body>
+</html>

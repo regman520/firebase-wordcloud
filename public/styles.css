@@ -303,6 +303,12 @@ code {
   gap: 12px;
 }
 
+.section-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .ghost-button {
   width: 92px;
   height: 34px;
@@ -310,6 +316,21 @@ code {
   color: var(--moss-dark);
   background: transparent;
   font-size: 0.86rem;
+}
+
+.ghost-link {
+  min-width: 92px;
+  height: 34px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(23, 33, 28, 0.16);
+  border-radius: 8px;
+  color: var(--moss-dark);
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-decoration: none;
 }
 
 ol {
